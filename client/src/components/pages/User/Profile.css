@@ -1,0 +1,286 @@
+.profile-container {
+    background-color: #fff;
+    padding: 22px;
+    border-radius: 20px;
+}
+
+
+.profile-user-img {
+    min-width: 160px;
+    height: 160px;
+    margin: 0 26px;
+}
+
+.profile-user-img>img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-top {
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.details-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.details-container div {
+    display: flex;
+}
+
+.details-name,.userdetails-name {
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.details-name>h1,.userdetails-name>h1 {
+    font-size: 35px;
+    text-transform: lowercase;
+}
+
+.details-name> div > a button {
+    cursor: pointer;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.details-name> div > button {
+    cursor: pointer;
+    color: #2E8A99;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.details-follow {
+    margin-bottom: 10px;
+}
+
+.details-follow>div {
+    margin-right: 14px;
+    gap: 6px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.details-follow>div>span {
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.details-follow>div>p {
+    font-size: 17px;
+}
+
+.details-bio {
+    flex-direction: column;
+}
+
+.details-bio>h3 {
+    margin-bottom: 8px;
+}
+
+.user-blogs {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.user-blogs>h3 {
+    padding: 20px;
+    padding-left: 16px;
+    font-size: 22px;
+}
+
+.blogCard-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+}
+
+
+.userdetails-name > div,.details-name > div{
+    gap: 12px;
+    align-items: center;
+}
+
+.userdetails-name > div >  button {
+    cursor: pointer;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: #C4DFDF;
+    color: #2E8A99;
+}
+
+#follow-btn{
+    background-color: #2E8A99;
+    color: #fff;
+}
+
+.unfollow-loader{
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.follow-loader{
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.follow-loader > div > div::after{
+    background: #fff;
+}
+
+.no-blogs{
+    display: flex;
+    justify-content: center;
+    height: 200px;
+    align-items: center;
+    flex-direction: column;
+}
+
+.no-blogs > h1{
+    margin: 15px;
+    font-size: 26px;
+}
+
+.no-blogs > a button{
+    cursor: pointer;
+    padding: 10px 18px;
+    background-color: #2E8A99;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.dash-nav-div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 10px;
+}
+
+.dash-nav{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2E8A99;
+    border-radius: 10px;
+    padding: 8px 10px;
+}
+
+.dash-nav  i {
+    font-size: 22px;
+    color: #fff;
+}
+
+.dash-nav > p{
+    font-size: 15px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 9px;
+}
+
+
+
+@media (max-width:760px) {
+    .profile{
+        padding: 7rem 0 0;
+    }
+    .profile-top{
+        flex-direction: column;
+    }
+
+    .profile-user-img {
+        min-width: 110px;
+        width: 110px;
+        height: 110px;
+        margin-right: auto;
+        margin-left:0;
+    }
+    .details-container {
+        padding: 0 5px;
+        margin-top: 12px;
+    }
+    .user-blogs>h3 {
+        padding: 20px 0;
+    }
+    .blogCard-container {
+        padding: 0;
+    }
+    .details-name> div > a button,
+    .details-name> div > button,
+    .userdetails-name > div >  button {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    .details-name>h1, .userdetails-name>h1 {
+        font-size: 30px;
+    }
+    .details-bio>h3 {
+        font-size: 17px;
+        margin-bottom: 4px;
+    }
+    .details-name, .userdetails-name {
+        margin-bottom: 12px;
+    }
+    
+    .details-follow>div>p {
+        font-size: 16px;
+    }
+
+    .no-blogs > h1{
+        margin: 14px;
+        font-size: 24px;
+    }
+    
+    .no-blogs > a button{
+        padding: 10px 10px;
+        font-size: 14px;
+    }
+
+    .dash-nav-div {
+        margin-right: 0;
+    }
+
+    .dash-nav{
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #2E8A99;
+        border-radius: 10px;
+        padding: 6px 10px;
+    }
+    
+    .dash-nav  i {
+        font-size: 20px;
+    }
+    
+    .dash-nav > p{
+        font-size: 13px;
+    }
+
+}

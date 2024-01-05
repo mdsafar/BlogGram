@@ -1,0 +1,115 @@
+.followers-list {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+  }
+  
+.followers-list-container{
+    padding: 20px;
+    width: 450px;
+    height: 440px;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.followers-list-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin: 5px 5px 0;
+}
+
+
+.followers-list-head > h1{
+    font-size: 20px;
+}
+
+.followers-list-head > i{
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.followers-list-results {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    overflow: auto;
+}
+
+.followers{
+    display: flex;
+    align-items: center;
+    padding: 12px 10px;
+    color: black;
+}
+
+.followers-img {
+    min-width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.followers-img>img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.followers-details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.followers-details >  button {
+    cursor: pointer;
+    padding: 6px 18px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #C4DFDF;
+    color: #2E8A99;
+}
+
+#follow-btn{
+    background-color: #2E8A99;
+    color: #fff;
+}
+
+
+.followers-name {
+    display: flex;
+    flex-direction: column;
+}
+
+.followers-name>h1 {
+    font-size: 17px;
+}
+
+.rfollowers-name>p {
+    font-size: 15px;
+
+}
+
+.followers:hover {
+    background-color: #F8F6F4;
+}
+
+@media (max-width:760px) {
+    .followers-list {
+        width: 100%;
+        height: 60%;
+    }
+    .followers-list-container {
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+}

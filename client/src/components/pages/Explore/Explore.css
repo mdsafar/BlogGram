@@ -1,0 +1,60 @@
+.exploreCard-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.exploreCard-container {
+    padding: 16px 22px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.exploreCard-content {
+    display: flex;
+    flex-direction: column;
+    color: #111;
+}
+
+.exploreCard-content h1 {
+    font-size: 26px;
+    text-transform: capitalize;
+}
+
+.exploreCard-content > p {
+    font-size: 18px;
+    line-height: 32px;
+    margin-top: 8px;
+    text-align: justify;
+}
+
+.exploreCard-content p>a:hover {
+    text-decoration: underline;
+}
+
+.exploreCard-content > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.exploreCard-content > div > p{
+    font-size: 14px;
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+.exploreCard-content > p > span{
+    color:#551A8B;
+}
+
+.exploreCard-content > p > span:hover{
+    text-decoration: underline;
+}
+
+@media (max-width:760px) {
+    .exploreCard-content > p {
+        height: 210px;
+        overflow: auto;
+    }
+}

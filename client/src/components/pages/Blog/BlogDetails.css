@@ -1,0 +1,238 @@
+.blogDetails {
+    padding: 6rem 3% 5rem;
+}
+
+.blogDetails-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 20px 25px;
+    border-radius: 10px;
+}
+
+.blogDetails-user {
+    display: flex;
+    align-items: center;
+}
+
+.blogDetails-user div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.blogDetails-user div:nth-child(2)>p {
+    cursor: pointer;
+    font-weight: 600;
+    color: #2E8A99;
+    margin-right: 10px;
+}
+
+.blogDetails-user div:nth-child(2)>div {
+    display: flex;
+    flex-direction: column;
+}
+
+.blogDetails-user div:nth-child(2)>div h2 {
+    color: #111;
+    font-size: 20px;
+}
+
+.blogDetails-user div:nth-child(2)>div p {
+    font-size: 12px;
+    color: #707070;
+}
+
+
+.blogDetails-content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.blogDetails-content h1 {
+    font-size: 30px;
+    text-transform: capitalize;
+}
+
+.blogDetails-content p {
+    font-size: 19px;
+    line-height: 32px;
+    margin-top: 8px;
+    text-align: justify;
+    height: 600px;
+    overflow: auto;
+    padding-bottom: 10px;
+}
+
+
+.blogDetails-bottom {
+    padding: 16px 0;
+    display: flex;
+    gap: 20px;
+    border-top: 1px solid #C4DFDF;
+}
+
+.blogDetails-bottom p {
+    margin-left: 6px;
+    font-size: 14px;
+
+}
+
+.blogDetails-bottom i {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.blogDetails-like {
+    display: flex;
+    align-items: center;
+}
+
+.blogDetails-comment {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #111;
+}
+
+.commentSection-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 20px;
+    background-color: #F8F6F4;
+    border-radius: 20px;
+}
+
+.commentSection-container>h1 {
+    margin-top: 6px;
+    margin-bottom: 12px;
+}
+
+.comment-input-container {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    transform: translateY(100%);
+    transition: transform 0.5s ease;
+}
+
+.comment-input-container.show {
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+
+
+.comment-input-container>i {
+    padding: 10px 16px;
+    font-size: 24px;
+    background-color: #fff;
+    cursor: pointer;
+    border-width: 1px 0 1px 1px;
+    border-style: solid;
+    border-color: #C4DFDF;
+    border-radius: 20px 0 0 20px;
+}
+
+
+.comment-input-container>button {
+    cursor: pointer;
+    padding: 0 18px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    background-color: #fff;
+    border-width: 1px 1px 1px 0;
+    border-style: solid;
+    border-color: #C4DFDF;
+    border-radius: 0 20px 20px 0;
+}
+
+.comment-input {
+    outline: none;
+    padding: 10px 0;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: #C4DFDF;
+}
+
+.comment-input::placeholder {
+    font-size: 14px;
+}
+
+#reply-close {
+    padding: 10px 0;
+    font-size: 22px;
+    border-left: none;
+    border-radius: 0;
+}
+
+.comment-loader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: #C4DFDF;
+}
+
+.no-comments {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0;
+}
+
+.no-comments>h1 {
+    font-size: 20px;
+    color: #707070;
+}
+
+.emoji-picker{
+    position: absolute;
+    bottom: 68px;
+}
+
+@media (max-width:769px) {
+    .blogDetails {
+        padding: 8rem 3% 5rem;
+    }
+}
+
+@media (max-width:760px) {
+    .blogDetails {
+        padding: 8rem 2% 5rem;
+    }
+
+    .blogDetails-container {
+        padding: 20px 10px;
+    }
+
+    .commentSection-container>h1 {
+        padding-left: 10px;
+    }
+
+    .commentSection-container {
+        padding: 14px 4px;
+    }
+
+    .blogDetails-content p {
+        height: 480px;
+    }
+
+    .comment-input-container>button {
+        cursor: pointer;
+        padding: 0 14px;
+        font-size: 15px;
+    }
+}

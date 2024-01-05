@@ -1,0 +1,114 @@
+.homeCard-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    background-color: white;
+    padding: 20px;
+    padding-bottom: 6px;
+    border-radius: 20px;
+}
+
+.homeCard-user {
+    display: flex;
+    align-items: center;
+}
+
+.homeCard-user div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+}
+
+.homeCard-user div:nth-child(2) h2 {
+    color: #111;
+    font-size: 20px;
+}
+
+.homeCard-user div:nth-child(2) p {
+    font-size: 12px;
+    color: #707070;
+}
+
+
+.homeCard-user-img {
+    margin-right: 12px;
+    min-width: 40px;
+    width: 40px;
+    height: 40px;
+}
+
+.homeCard-user-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.homeCard-content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.homeCard-content h1 {
+    font-size: 26px;
+    text-transform: capitalize;
+}
+
+.homeCard-content p {
+    font-size: 19px;
+    line-height: 32px;
+    margin-top: 8px;
+    text-align: justify;
+}
+
+.homeCard-content p>a:hover {
+    text-decoration: underline;
+}
+
+.homeCard-bottom {
+    margin: 10px 0;
+    display: flex;
+    gap: 20px;
+}
+
+.homeCard-bottom p {
+    margin-left: 6px;
+    font-size: 14px;
+}
+
+.homeCard-bottom i {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.homeCard-like {
+    display: flex;
+    align-items: center;
+}
+
+.homeCard-comment {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #111;
+}
+
+.no-Homeblogs{
+    display: flex;
+    height: 60vh;
+    justify-content: center;
+    align-items: center;
+    color: #2E8A99;
+    font-size: 30px;
+}
+
+
+@media (max-width:760px) {
+    .homeCard-content p {
+        height: 300px;
+        overflow: auto;
+    }
+    .no-Homeblogs{
+        font-size: 24px;
+    }
+}
