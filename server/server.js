@@ -50,6 +50,10 @@ app.use("/api/v1",user)
 app.use("/api/v1",blog)
 app.use("/api/v1",chat)
 
+app.get("/", (req, res) => {
+  res.send("API IS HOT");
+});
+
 
 app.use(notFound)
 app.use(errorHandler)
