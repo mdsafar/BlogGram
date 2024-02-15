@@ -3,7 +3,7 @@ import { DELETE_MESSAGE_FAIL, DELETE_MESSAGE_REQUEST, DELETE_MESSAGE_SUCCESS, GE
 
 
 
-const Url = "https://bloggram-backend.onrender.com"
+const Url = "http://localhost:4000"
 
 
 export const getMyInbox= () => async(dispatch)=>{

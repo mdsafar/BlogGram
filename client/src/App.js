@@ -20,7 +20,7 @@ import Dashboard from './components/pages/Dashboard/Dashboard';
 
 function App() {
 
-  const socket = io('https://bloggram-backend.onrender.com')
+  const socket = io('http://localhost:4000')
 
   return (
     <Router>
