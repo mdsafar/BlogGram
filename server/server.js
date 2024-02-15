@@ -18,7 +18,7 @@ ConnectDataBase()
 
 
 const corsOptions = {
-    origin:'http://localhost:3000',
+    origin:'https://bloggram-1ym8.onrender.com',
     credentials: true, 
 }
 
@@ -33,7 +33,7 @@ app.use(cors(corsOptions))
 const httpServer = http.createServer(app)
 const io = new Server(httpServer,{
     cors:{
-        origin:['http://localhost:3000'],
+        origin:['https://bloggram-1ym8.onrender.com'],
     },
 })
 
