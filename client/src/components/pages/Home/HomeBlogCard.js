@@ -1,46 +1,45 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
-import { getBlogLikeStatus, getFollowingUserBlogs, likeBlog, unlikeBlog } from "../../../actions/blogAction";
+import { getBlogLikeStatus, likeBlog, unlikeBlog } from "../../../actions/blogAction";
 import TimeAgo from "javascript-time-ago";
 import en from 'javascript-time-ago/locale/en'
-import { LIKE_BLOG_RESET } from "../../../constants/blogConstants";
 
 
-const HomeBlogCard = ({ blog,handleLoadingAction }) => {
+
+const HomeBlogCard = ({ blog }) => {
 
     const dispatch = useDispatch()
     const { blogLikeStatus } = useSelector((state) => state.blogLikeStatus)
-    const {user:loggedUser} = useSelector((state)=> state.user)
-    const { blogLikedSuccess, blogUnlikedSuccess } = useSelector((state) => state.likeBlog)
+    const { user: loggedUser } = useSelector((state) => state.user)
+    const [totalLikes, setTotalLikes] = useState(0)
+    const [isBlogLiked, setIsBlogLiked] = useState(false)
+
     TimeAgo.addLocale(en)
     const createdTime = new Date(blog.createdAt);
+    const slug = blog?.slug
 
-    const isBlogLiked = blogLikeStatus[blog.slug]
 
     useEffect(() => {
-        dispatch(getBlogLikeStatus(blog.slug))
-    }, [dispatch, blog.slug])
+        dispatch(getBlogLikeStatus(slug))
+        setTotalLikes(blog?.likes.length)
+        setIsBlogLiked(blogLikeStatus[slug])
+
+        // eslint-disable-next-line
+    }, [dispatch, slug, blogLikeStatus[slug]])
+
 
     function handleLikeBlog() {
-        dispatch(likeBlog(blog.slug))
+        dispatch(likeBlog(blog?.slug))
+        setIsBlogLiked(true)
+        setTotalLikes(prev => prev + 1)
     }
 
     function handleUnlikeBlog() {
-        dispatch(unlikeBlog(blog.slug))
+        dispatch(unlikeBlog(blog?.slug))
+        setIsBlogLiked(false)
+        setTotalLikes(prev => prev - 1)
     }
-
-    useEffect(() => {
-       if(blogLikedSuccess || blogUnlikedSuccess){
-          handleLoadingAction()
-          dispatch(getFollowingUserBlogs())
-          dispatch(getBlogLikeStatus(blog.slug)) 
-       }
-       return(()=>{
-          dispatch({type:LIKE_BLOG_RESET})
-       })
-    },[dispatch,blog.slug,handleLoadingAction,blogLikedSuccess,blogUnlikedSuccess])
-
 
     return <>
         <div className="homeCard-container">
@@ -73,7 +72,7 @@ const HomeBlogCard = ({ blog,handleLoadingAction }) => {
                     ) : (
                         <i onClick={handleLikeBlog} className="bi bi-heart"></i>
                     )}
-                    <p>{blog.likes.length} Likes</p>
+                    <p>{totalLikes} Likes</p>
                 </div>
                 <Link to={`/b/${blog.slug}`} className="homeCard-comment">
                     <i className="bi bi-chat-text"></i>

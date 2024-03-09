@@ -6,7 +6,7 @@ import "./CommentSection.css"
 import { useDispatch, useSelector } from "react-redux";
 import { deleteComment, getBlogDetails, getCommentLikeStatus, likeComment, unlikeComment } from "../../../actions/blogAction";
 import SubComments from "./SubComments";
-import { DELETE_COMMENT_RESET, LIKE_COMMENT_RESET, UNLIKE_COMMENT_RESET } from "../../../constants/blogConstants";
+import { DELETE_COMMENT_RESET } from "../../../constants/blogConstants";
 import SmallLoader from "../../layout/SmallLoader/SmallLoader";
 
 
@@ -14,23 +14,26 @@ const CommentSection = ({ comment, handleReply, handleLoadingAction }) => {
     const dispatch = useDispatch()
     const { user: loggedUser } = useSelector((state) => state.user)
     const { commentLikeStatus } = useSelector((state) => state.commentLikeStatus)
-    const { commentLikedSuccess } = useSelector((state) => state.likeComment)
-    const { commentUnlikedSuccess } = useSelector((state) => state.unlikeComment)
     const { success: deleteCommentSuccess, loading } = useSelector((state) => state.deleteComment)
     const [showDelete, setShowDelete] = useState(false)
     const [showReplies, setShowReplies] = useState(false)
     const [showMore,setShowMore] = useState(false)
     const {slug} = useParams()
+    const [isCommentLiked,setIsCommentLiked] = useState(false)
+     const [totalLikes,setTotalLikes] = useState(0)
 
     TimeAgo.addLocale(en)
     const createdTime = comment ? new Date(comment.createdAt) : new Date();
-
     const commentId = comment?._id
-    const isCommentLiked = commentLikeStatus[commentId]
+  
 
 
     useEffect(() => {
           dispatch(getCommentLikeStatus(slug, commentId))  
+          setIsCommentLiked(commentLikeStatus[commentId])
+          setTotalLikes(comment.likes.length)
+
+        // eslint-disable-next-line
     }, [dispatch, slug, commentId])
 
 
@@ -44,10 +47,14 @@ const CommentSection = ({ comment, handleReply, handleLoadingAction }) => {
 
     function handleLikeComment() {
         dispatch(likeComment(slug, commentId))
+        setIsCommentLiked(true)
+        setTotalLikes(prev => prev + 1)
     }
 
     function handleUnlikeComment() {
         dispatch(unlikeComment(slug, commentId))
+        setIsCommentLiked(false)
+        setTotalLikes(prev => prev - 1)
     }
 
     function handleDelete() {
@@ -55,13 +62,6 @@ const CommentSection = ({ comment, handleReply, handleLoadingAction }) => {
     }
 
     useEffect(() => {
-        if (commentLikedSuccess || commentUnlikedSuccess) {
-            handleLoadingAction()
-            dispatch(getBlogDetails(slug))
-            dispatch(getCommentLikeStatus(slug,commentId))
-            dispatch({ type: LIKE_COMMENT_RESET })
-            dispatch({ type: UNLIKE_COMMENT_RESET })
-        }
 
         if (deleteCommentSuccess) {
             handleLoadingAction()
@@ -74,8 +74,6 @@ const CommentSection = ({ comment, handleReply, handleLoadingAction }) => {
             slug,
             commentId,
             handleLoadingAction,
-            commentLikedSuccess,
-            commentUnlikedSuccess,
             deleteCommentSuccess
         ])
 
@@ -105,7 +103,7 @@ const CommentSection = ({ comment, handleReply, handleLoadingAction }) => {
                             ) : (
                                 <i onClick={handleLikeComment} className="bi bi-heart"></i>
                             )}
-                            {comment.likes.length > 0 && <p>{comment.likes.length}</p>}
+                            {totalLikes > 0 && <p>{totalLikes}</p>}
                         </div>
                         <p onClick={() => handleReply(comment.userId.username, commentId)} >Reply</p>
                         {loading ? (

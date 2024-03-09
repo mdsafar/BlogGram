@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { followUser, getFollowingStatus, unfollowUser } from "../../../actions/userAction";
-import SmallLoader from "../../layout/SmallLoader/SmallLoader";
 import { FOLLOW_USER_RESET } from "../../../constants/userConstants";
 
 
@@ -10,7 +9,7 @@ import { FOLLOW_USER_RESET } from "../../../constants/userConstants";
 
 const FollowersUserList = ({ user, closeFollowersList, closeFollowingList }) => {
     const dispatch = useDispatch()
-    const { followingStatus, loading } = useSelector((state) => state.followingStatus)
+    const { followingStatus } = useSelector((state) => state.followingStatus)
     const { user: loggedUser } = useSelector((state) => state.user)
     const { success } = useSelector((state) => state.followUser)
 
@@ -61,15 +60,12 @@ const FollowersUserList = ({ user, closeFollowersList, closeFollowingList }) => 
                 {isLoggedUserIn ?
                     ''
                     :
-                    loading ? (
-                        <SmallLoader />
+                    isFollowing ? (
+                        <button onClick={handleUnfollow}>Following</button>
                     ) : (
-                        isFollowing ? (
-                            <button onClick={handleUnfollow}>Following</button>
-                        ) : (
-                            <button onClick={handleFollow} id="follow-btn" >Follow</button>
-                        )
+                        <button onClick={handleFollow} id="follow-btn" >Follow</button>
                     )
+
                 }
             </div>
 

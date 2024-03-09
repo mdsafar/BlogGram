@@ -20,32 +20,43 @@ const UserDetails = ({ socket }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { user, blogs, loading } = useSelector((state) => state.profile)
-    const { success, loading: followLoading } = useSelector((state) => state.followUser)
+    const { loading: followLoading } = useSelector((state) => state.followUser)
     const { user: loggedUser } = useSelector((state) => state.user)
     const { followingStatus } = useSelector((state) => state.followingStatus)
-    const [loadingAction, setLoadingAction] = useState(true)
     const [roomId, setRoomId] = useState('')
     const [showFollowersList, setShowFollowersList] = useState(false)
     const [showFollowingList, setShowFollowingList] = useState(false)
+    const [isFollowing,setIsFollowing] = useState(false)
+    const [totalFollowers,setTotalFollowers] = useState(0)
 
     const { name } = useParams()
 
-    const isFollowing = followingStatus[name]
+
 
     const userFollowers = user?.followers
     const userFollowing = user?.following
+    const userName = user?.username
 
     useEffect(() => {
         dispatch(getUserDetails(name))
-        dispatch(getFollowingStatus(name))
-    }, [dispatch, name])
+        dispatch(getFollowingStatus(userName))
+        setIsFollowing(followingStatus[userName])
+        setTotalFollowers(user?.followers.length)
+
+        // eslint-disable-next-line
+    }, [dispatch, name,followingStatus[userName],user?.followers.length])
+
 
     function handleFollowUser() {
         dispatch(followUser(user._id))
+        setIsFollowing(true)
+        setTotalFollowers(prev => prev + 1)
     }
 
     function handleUnfollowUser() {
         dispatch(unfollowUser(user._id))
+        setIsFollowing(false)
+        setTotalFollowers(prev => prev - 1)
     }
 
     function closeFollowersList() {
@@ -71,11 +82,6 @@ const UserDetails = ({ socket }) => {
     }
 
     useEffect(() => {
-        if (success) {
-            setLoadingAction(false)
-            dispatch(getUserDetails(name))
-            dispatch(getFollowingStatus(name))
-        }
 
         if (roomId) {
             navigate(`/direct/t/${roomId}`)
@@ -83,12 +89,11 @@ const UserDetails = ({ socket }) => {
 
         dispatch({ type: FOLLOW_USER_RESET })
 
-    }, [success, dispatch, name, roomId, navigate, userFollowing, userFollowers])
-
+    }, [dispatch, roomId, navigate])
 
     return <>
         <Header />
-        {loading && loadingAction ? (
+        {loading ? (
             <Loader />
         ) : (
             user ? (
@@ -116,7 +121,7 @@ const UserDetails = ({ socket }) => {
                                         <p>Blogs</p>
                                     </div>
                                     <div onClick={() => setShowFollowersList(true)}>
-                                        <span>{user?.followers.length}</span>
+                                        <span>{totalFollowers}</span>
                                         <p>Followers</p>
                                     </div>
                                     <div onClick={() => setShowFollowingList(true)}>

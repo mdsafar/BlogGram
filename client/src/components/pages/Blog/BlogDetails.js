@@ -9,7 +9,7 @@ import TimeAgo from "javascript-time-ago";
 import en from 'javascript-time-ago/locale/en'
 import Loader from "../../layout/Loader/Loader";
 import SmallLoader from "../../layout/SmallLoader/SmallLoader"
-import { ADD_COMMENT_RESET, LIKE_BLOG_RESET } from "../../../constants/blogConstants";
+import { ADD_COMMENT_RESET } from "../../../constants/blogConstants";
 import { followUser, getFollowingStatus } from "../../../actions/userAction";
 import EmojiPicker from 'emoji-picker-react';
 
@@ -20,7 +20,6 @@ const BlogDetails = () => {
     const { user: loggedUser } = useSelector((state) => state.user)
     const { blogLikeStatus } = useSelector((state) => state.blogLikeStatus)
     const { loading: commentloading, success: addCommentSuccess } = useSelector((state) => state.addComment)
-    const { blogLikedSuccess, blogUnlikedSuccess } = useSelector((state) => state.likeBlog);
     const { success: followSuccess } = useSelector((state) => state.followUser)
     const { followingStatus } = useSelector((state) => state.followingStatus)
     const { slug } = useParams();
@@ -31,34 +30,39 @@ const BlogDetails = () => {
     const [replyText, setReplyText] = useState('')
     const [commentId, setCommentId] = useState('')
     const [showEmoji, setShowEmoji] = useState(false)
-
+    const [isBlogLiked,setIsBlogLiked] = useState(false)
+    const [totalLikes,setTotalLikes] = useState(0)
 
 
     TimeAgo.addLocale(en)
     const createdTime = blog ? new Date(blog.createdAt) : new Date();
 
     const name = blog?.userId?.username
-
-    const isBlogLiked = blogLikeStatus[blog?.slug]
     const isFollowing = followingStatus[name]
 
 
     useEffect(() => {
         dispatch(getBlogDetails(slug))
         dispatch(getBlogLikeStatus(slug))
-        if (name) {
-            dispatch(getFollowingStatus(name));
-        }
-    }, [dispatch, slug, name])
+        name && dispatch(getFollowingStatus(name))
+        setTotalLikes(blog?.likes.length)
+        setIsBlogLiked(blogLikeStatus[blog?.slug])
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispatch, slug, name,blog?.slug])
 
 
 
     function handleLikeBlog() {
         dispatch(likeBlog(blog?.slug))
+        setIsBlogLiked(true)
+        setTotalLikes(prev => prev + 1)
     }
 
     function handleUnlikeBlog() {
         dispatch(unlikeBlog(blog?.slug))
+        setIsBlogLiked(false)
+        setTotalLikes(prev => prev - 1)
     }
 
     function selectEmoji(item) {
@@ -105,19 +109,10 @@ const BlogDetails = () => {
 
 
     useEffect(() => {
-        if (blogLikedSuccess || blogUnlikedSuccess) {
-            setLoadingAction(false)
-            dispatch(getBlogDetails(slug))
-            dispatch(getBlogLikeStatus(slug))
-            dispatch({ type: LIKE_BLOG_RESET })
-        }
-
         if (followSuccess) {
             setLoadingAction(false)
             dispatch(getBlogDetails(slug))
-            if (name) {
-                dispatch(getFollowingStatus(name));
-            }
+            name && dispatch(getFollowingStatus(name))
         }
 
         if (addCommentSuccess) {
@@ -128,8 +123,6 @@ const BlogDetails = () => {
 
     }, [dispatch,
         slug,
-        blogLikedSuccess,
-        blogUnlikedSuccess,
         addCommentSuccess,
         name, followSuccess])
 
@@ -184,7 +177,7 @@ const BlogDetails = () => {
                             ) : (
                                 <i onClick={handleLikeBlog} className="bi bi-heart"></i>
                             )}
-                            <p>{blog?.likes.length} Likes</p>
+                            <p>{totalLikes} Likes</p>
                         </div>
                         <div className="blogDetails-comment">
                             <i className="bi bi-chat-text"></i>

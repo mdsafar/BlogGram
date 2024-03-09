@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import './Home.css'
 import { useDispatch, useSelector } from "react-redux"
 import HomeBlogCard from "./HomeBlogCard";
@@ -12,29 +12,23 @@ import Footer from "../../layout/Footer/Footer";
 const Home = () => {
     const dispatch = useDispatch()
     const { blogs, loading } = useSelector((state) => state.followingUserBlogs)
-    const [loadingAction,setLoadingAction] = useState(true)
 
 
     useEffect(() => {
         dispatch(getFollowingUserBlogs())
     }, [dispatch])
 
-    function handleLoadingAction(){
-        setLoadingAction(false)
-    }
-
-
 
     return <>
       <Header/>
-        {loading && loadingAction ? (
+        {loading ? (
             <Loader />
         ) : (
             <section>
                 {blogs &&
                   blogs.length !== 0 ? (
                     [...blogs].reverse().map((blog) => {
-                        return <HomeBlogCard blog={blog} handleLoadingAction={handleLoadingAction} key={blog._id} />
+                        return <HomeBlogCard blog={blog}  key={blog._id} />
                     })
                   ):(
                   <div className="no-Homeblogs">

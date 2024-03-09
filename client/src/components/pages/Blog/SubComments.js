@@ -12,19 +12,26 @@ const SubComments = ({ subComment, slug, commentId, handleReply }) => {
     const { user: loggedUser } = useSelector((state) => state.user)
     const { subCommentLikeStatus } = useSelector((state) => state.commentLikeStatus)
     const { loading } = useSelector((state) => state.deleteComment)
-    const { commentLikedSuccess } = useSelector((state) => state.likeComment)
-    const { commentUnlikedSuccess } = useSelector((state) => state.unlikeComment)
     const [showDelete, setShowDelete] = useState(false)
     const [showMore,setShowMore] = useState(false)
+    const [isSubCommentLiked,setIsSubCommentLiked] = useState(false)
+    const [totalLikes,setTotalLikes] = useState(0)
 
     TimeAgo.addLocale(en)
     const createdTime = subComment ? new Date(subComment.createdAt) : new Date();
-
-    const isSubCommentLiked = subCommentLikeStatus[subComment._id]
+    const subCommentId = subComment?._id
 
     useEffect(() => {
-        dispatch(getSubCommentLikeStatus(slug, commentId, subComment._id))
-    }, [dispatch, slug, subComment._id, commentId])
+        if (subComment) {
+            dispatch(getSubCommentLikeStatus(slug, commentId, subCommentId))
+            setIsSubCommentLiked(subCommentLikeStatus[subCommentId])
+            setTotalLikes(subComment.likes.length)
+        }
+
+        // eslint-disable-next-line
+    }, [dispatch, slug,subCommentId, commentId,subCommentLikeStatus[subCommentId]])
+
+    console.log(isSubCommentLiked);
 
     function toggleMouseOver() {
         setShowDelete(!showDelete)
@@ -32,10 +39,14 @@ const SubComments = ({ subComment, slug, commentId, handleReply }) => {
 
     function handleLikeSubComment() {
         dispatch(likeSubComment(slug, commentId, subComment._id))
+        setIsSubCommentLiked(true)
+        setTotalLikes(prev => prev + 1)
     }
 
     function handleUnlikeSubComment() {
         dispatch(unlikeSubComment(slug, commentId, subComment._id))
+        setIsSubCommentLiked(false)
+        setTotalLikes(prev => prev - 1)
     }
 
     function handleDelete() {
@@ -43,19 +54,7 @@ const SubComments = ({ subComment, slug, commentId, handleReply }) => {
     }
 
 
-    useEffect(() => {
-        if (commentLikedSuccess || commentUnlikedSuccess) {
-            dispatch(getSubCommentLikeStatus(slug, commentId, subComment._id))
-        }
-    },[     dispatch,
-            slug,
-            commentId,
-            subComment._id,
-            commentLikedSuccess,
-            commentUnlikedSuccess
-     ])
-
-     const truncatedText = subComment.text.length > 150 ? subComment.text.slice(0, 150) : subComment.text;
+    const truncatedText = subComment.text.length > 150 ? subComment.text.slice(0, 150) : subComment.text;
 
 
     return (
@@ -80,7 +79,7 @@ const SubComments = ({ subComment, slug, commentId, handleReply }) => {
                             ) : (
                                 <i onClick={handleLikeSubComment} className="bi bi-heart"></i>
                             )}
-                            {subComment.likes.length > 0 && <p>{subComment.likes.length}</p>}
+                            {totalLikes > 0 && <p>{totalLikes}</p>}
                         </div>
                         <p onClick={() => handleReply(subComment.userId.username, commentId)}>Reply</p>
                         {loading ? (
