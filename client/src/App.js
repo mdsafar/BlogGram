@@ -5,12 +5,12 @@ import Home from "./components/pages/Home/Home";
 import Explore from "./components/pages/Explore/Explore";
 import BlogDetails from "./components/pages/Blog/BlogDetails";
 import Profile from "./components/pages/User/Profile";
-// import UserDetails from './components/pages/User/UserDetails';
+import UserDetails from "./components/pages/User/UserDetails";
 import CreateBlog from "./components/pages/Blog/CreateBlog";
 import EditProfile from "./components/pages/User/EditProfile";
-// import Chats from './components/pages/Chat/Chats';
-// import ChatRoom from './components/pages/Chat/ChatRoom';
-// import { io } from "socket.io-client";
+import Chats from "./components/pages/Chat/Chats";
+import ChatRoom from "./components/pages/Chat/ChatRoom";
+import { io } from "socket.io-client";
 import {
   ProtectedRoute,
   AdminRoute,
