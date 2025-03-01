@@ -3,7 +3,7 @@ import { DELETE_MESSAGE_FAIL, DELETE_MESSAGE_REQUEST, DELETE_MESSAGE_SUCCESS, GE
 
 
 
-const Url = "https://blog-gram-server.onrender.com"
+const Url = "https://blog-gram-server.onrender.com/api/v1"
 
 
 export const getMyInbox= () => async(dispatch)=>{
