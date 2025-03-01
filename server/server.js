@@ -18,7 +18,7 @@ ConnectDataBase()
 
 
 const corsOptions = {
-    origin:'https://blog-gram-server.onrender.com',
+    origin:'https://blog-gram.onrender.com',
     credentials: true, 
 }
 
