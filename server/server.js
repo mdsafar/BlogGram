@@ -31,11 +31,11 @@ app.use(cookieParser())
 app.use(cors(corsOptions))
 
 const httpServer = http.createServer(app)
-const io = new Server(httpServer,{
-    cors:{
-        origin:['https://blog-gram-server.onrender.com'],
-    },
-})
+// const io = new Server(httpServer,{
+//     cors:{
+//         origin:['https://blog-gram-server.onrender.com'],
+//     },
+// })
 
 
 cloudinary.config({ 
@@ -58,7 +58,7 @@ app.get("/", (req, res) => {
 app.use(notFound)
 app.use(errorHandler)
 
-io.on('connection',sockets)
+// io.on('connection',sockets)
 
 
 //server
