@@ -20,7 +20,7 @@ import Dashboard from './components/pages/Dashboard/Dashboard';
 
 function App() {
 
-  const socket = io('http://localhost:4000')
+  const socket = io('https://blog-gram-server.onrender.com')
 
   return (
     <Router>
