@@ -3,7 +3,7 @@ import { ADD_COMMENT_FAIL, ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ADD_SUBCOMM
 
 
 
-const Url = "http://localhost:4000"
+const Url = "https://blog-gram-server.onrender.com"
 
 export const getFollowingUserBlogs = () => async (dispatch) => {
     try {
